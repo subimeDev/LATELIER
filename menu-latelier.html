@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Atelier Bistro — Menú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Cormorant+Upright:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-deep: #0a1628;
+    --navy: #0f1f3a;
+    --navy-mid: #142849;
+    --navy-light: #1c3358;
+    --gold: #d4a64a;
+    --gold-bright: #e8c878;
+    --gold-soft: #b8923f;
+    --cream: #f4ead5;
+    --ivory: #fbf6e9;
+    --dim: rgba(244, 234, 213, 0.55);
+    --line: rgba(212, 166, 74, 0.25);
+    --line-strong: rgba(212, 166, 74, 0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--navy-deep);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at top, rgba(20, 40, 73, 0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(15, 31, 58, 0.4) 0%, transparent 60%);
+  }
+
+  /* Patrón geométrico de fondo (como el PDF) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, transparent 48%, rgba(212, 166, 74, 0.025) 49%, rgba(212, 166, 74, 0.025) 51%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(212, 166, 74, 0.025) 49%, rgba(212, 166, 74, 0.025) 51%, transparent 52%);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { position: relative; z-index: 1; }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .hero-frame {
+    border: 1px solid var(--line-strong);
+    padding: 4rem 3rem;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(180deg, rgba(20, 40, 73, 0.4) 0%, rgba(10, 22, 40, 0.6) 100%);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 1.4s ease-out;
+  }
+
+  .hero-frame::before,
+  .hero-frame::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gold);
+  }
+  .hero-frame::before {
+    top: -1px; left: -1px;
+    border-right: none; border-bottom: none;
+  }
+  .hero-frame::after {
+    bottom: -1px; right: -1px;
+    border-left: none; border-top: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.6em;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 0.95;
+    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-soft) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 20px rgba(212, 166, 74, 0.15);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Upright', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: var(--cream);
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .hero-divider .line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .hero-divider .diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .hero-desc {
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+    color: var(--dim);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    background: transparent;
+    border: 1px solid var(--gold);
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--navy-deep);
+    letter-spacing: 0.5em;
+  }
+  .hero-cta .arrow { transition: transform 0.4s ease; }
+  .hero-cta:hover .arrow { transform: translateX(4px); }
+
+  /* === BUSCADOR Y FILTROS STICKY === */
+  .control-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 22, 40, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem 2rem;
+    transition: padding 0.3s ease;
+  }
+
+  .control-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+
+  .search-box svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+  }
+
+  .search-input {
+    width: 100%;
+    background: rgba(20, 40, 73, 0.5);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    padding: 0.85rem 1rem 0.85rem 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(20, 40, 73, 0.8);
+  }
+  .search-input::placeholder {
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  .filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-chip {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .filter-chip:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .filter-chip.active {
+    background: var(--gold);
+    color: var(--navy-deep);
+    border-color: var(--gold);
+  }
+
+  .category-nav {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+  .category-nav::-webkit-scrollbar { height: 4px; }
+  .category-nav::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  .cat-link {
+    font-family: 'Cormorant Upright', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  .cat-link:hover, .cat-link.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* === SECCIONES DE MENÚ === */
+  .menu-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .category {
+    margin-bottom: 6rem;
+    scroll-margin-top: 200px;
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .category-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--cream);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .category-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .category-divider .line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+  .category-divider .ornament {
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card {
+    background: linear-gradient(180deg, rgba(20, 40, 73, 0.4) 0%, rgba(15, 31, 58, 0.6) 100%);
+    border: 1px solid var(--line);
+    padding: 1.75rem;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .item-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .item-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    background: linear-gradient(180deg, rgba(28, 51, 88, 0.5) 0%, rgba(20, 40, 73, 0.7) 100%);
+  }
+  .item-card:hover::before { opacity: 1; }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .item-name {
+    font-family: 'Cormorant Upright', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .item-price {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .item-price-multi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+    font-size: 0.85rem;
+  }
+  .item-price-multi span { line-height: 1.2; }
+
+  .item-desc {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--dim);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .item-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .tag.veg { color: #8fc480; border-color: rgba(143, 196, 128, 0.4); }
+  .tag.nogluten { color: #d4a64a; }
+  .tag.spicy { color: #e07b5b; border-color: rgba(224, 123, 91, 0.4); }
+  .tag.lactose { color: #a8c8e8; border-color: rgba(168, 200, 232, 0.4); }
+  .tag.signature { color: var(--gold-bright); border-color: var(--gold); background: rgba(212, 166, 74, 0.1); }
+
+  /* === MODAL DE PLATO (galería) === */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--navy);
+    border: 1px solid var(--gold);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(212, 166, 74, 0.15), transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(212, 166, 74, 0.1), transparent 50%);
+  }
+  .modal-image-icon {
+    font-size: 3.5rem;
+    opacity: 0.4;
+    z-index: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(10, 22, 40, 0.7);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  .modal-close:hover { background: var(--gold); color: var(--navy); }
+
+  .modal-body { padding: 2rem; }
+  .modal-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .modal-price {
+    font-family: 'Cormorant Upright', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .modal-desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+  }
+  .modal-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* === Empty state === */
+  .empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--dim);
+    font-style: italic;
+    font-size: 1.2rem;
+    grid-column: 1 / -1;
+  }
+
+  /* === Footer === */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-family: 'Cormorant Upright', serif;
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+  }
+
+  /* === Animaciones === */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .item-card { animation: fadeIn 0.5s ease backwards; }
+  .item-card:nth-child(1) { animation-delay: 0.05s; }
+  .item-card:nth-child(2) { animation-delay: 0.1s; }
+  .item-card:nth-child(3) { animation-delay: 0.15s; }
+  .item-card:nth-child(4) { animation-delay: 0.2s; }
+  .item-card:nth-child(5) { animation-delay: 0.25s; }
+  .item-card:nth-child(6) { animation-delay: 0.3s; }
+
+  /* === Responsive === */
+  @media (max-width: 640px) {
+    .hero-frame { padding: 3rem 1.5rem; }
+    .filter-chip { font-size: 0.65rem; padding: 0.5rem 0.85rem; }
+    .menu-wrapper { padding: 3rem 1rem 4rem; }
+    .items-grid { grid-template-columns: 1fr; }
+    .item-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-frame">
+      <div class="hero-eyebrow">BIENVENIDOS</div>
+      <h1 class="hero-title">L'Atelier</h1>
+      <div class="hero-subtitle">BISTRO</div>
+      <div class="hero-divider">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+      </div>
+      <p class="hero-desc">
+        El concepto de bistró es el clásico lugar donde come el parisino de a pie. Platos típicos de la gastronomía francesa, sin la formalidad de un restaurante — producto de primera calidad en un ambiente más relajado.
+      </p>
+      <a href="#menu" class="hero-cta">
+        <span>Explorar Menú</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- BARRA DE CONTROL -->
+  <div class="control-bar" id="menu">
+    <div class="control-inner">
+      <div class="search-row">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Buscar plato, ingrediente...">
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter-chip active" data-filter="all">Todos</button>
+          <button class="filter-chip" data-filter="veg">🌱 Vegetariano</button>
+          <button class="filter-chip" data-filter="nogluten">Sin Gluten</button>
+          <button class="filter-chip" data-filter="lactose">Sin Lactosa</button>
+          <button class="filter-chip" data-filter="signature">⭐ Signature</button>
+        </div>
+      </div>
+      <nav class="category-nav" id="catNav"></nav>
+    </div>
+  </div>
+
+  <!-- MENÚ -->
+  <main class="menu-wrapper" id="menuContent"></main>
+
+  <footer>
+    L'ATELIER · BISTRO · MENÚ
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-image">
+      <span class="modal-image-icon" id="modalIcon">🍽</span>
+    </div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <h3 class="modal-name" id="modalName"></h3>
+      <div class="modal-price" id="modalPrice"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// === DATOS DEL MENÚ ===
+const menuData = [
+  {
+    id: 'cafe',
+    title: 'Café',
+    subtitle: 'Lavazza',
+    icon: '☕',
+    items: [
+      { name: 'Café Expresso', price: 2000, desc: 'El clásico expresso italiano, intenso y aromático.', tags: ['veg','nogluten'] },
+      { name: 'Café Expresso Doble', price: 3000, desc: 'Doble dosis para quienes buscan más carácter.', tags: ['veg','nogluten'] },
+      { name: 'Café Americano', priceMulti: { 'Mediano': 2200, 'Grande': 3000 }, desc: 'Expresso con agua caliente, suave y aromático.', tags: ['veg','nogluten'] },
+      { name: 'Café Lungo', priceMulti: { 'Mediano': 2200, 'Grande': 3500 }, desc: 'Expresso prolongado con más cuerpo y aroma.', tags: ['veg','nogluten'] },
+      { name: 'Café Cortado', priceMulti: { 'Mediano': 2500, 'Grande': 3500 }, desc: 'Expresso con un toque justo de leche caliente.', tags: ['veg','nogluten'] },
+      { name: 'Capuccino', priceMulti: { 'Mediano': 2500, 'Grande': 3500 }, desc: 'Espuma cremosa de leche sobre expresso italiano.', tags: ['veg','nogluten'] },
+      { name: 'Capuccino Vainilla', priceMulti: { 'Mediano': 2500, 'Grande': 3500 }, desc: 'Capuccino aromatizado con vainilla.', tags: ['veg','nogluten'] },
+      { name: 'Mokaccino', priceMulti: { 'Mediano': 2500, 'Grande': 3500 }, desc: 'Capuccino con un toque de chocolate.', tags: ['veg','nogluten'] },
+      { name: 'Latte', priceMulti: { 'Mediano': 2500, 'Grande': 3500 }, desc: 'Café con abundante leche cremosa.', tags: ['veg','nogluten'] },
+      { name: 'Café Sin Lactosa', price: 3000, desc: 'Versión sin lactosa de nuestros cafés clásicos.', tags: ['veg','nogluten','lactose'] },
+      { name: 'Chocolate Chaud', priceMulti: { 'Pequeño': 2000, 'Mediano': 3500 }, desc: 'Chocolate caliente Lavazza, suave y reconfortante.', tags: ['veg'] }
+    ]
+  },
+  {
+    id: 'desayunos',
+    title: 'Petit-Déjeuner',
+    subtitle: 'Desayunos',
+    icon: '🥐',
+    items: [
+      { name: 'Croissant con Mermelada', price: 2500, desc: 'Croissant de 100gr acompañado con mermelada de la casa.', tags: ['veg'] },
+      { name: 'Croissant Jamón y Queso', price: 3500, desc: 'Croissant de 100gr relleno de jamón y queso.', tags: [] },
+      { name: 'Croissant Monmartre', price: 6500, desc: 'Relleno de queso raclette y camembert, jamón serrano y tomates cherrys.', tags: ['signature'] },
+      { name: 'Croissant de Salmón Ahumado', price: 6800, desc: 'Relleno de omelette, queso crema, salmón ahumado y palta.', tags: ['signature'] },
+      { name: 'Croissant Caprese', price: 4500, desc: 'Mozzarella fresca, tomates marinados con aceite de oliva, orégano y pesto de albahaca.', tags: ['veg'] },
+      { name: 'Desayuno Americano', price: 6000, desc: 'Huevos revueltos, jamón, queso gauda, tocino, pan brioche, mermelada de estación y mantequilla.', tags: [] },
+      { name: 'Tostadas Brouillés', price: 6800, desc: 'Pan brioche, salmón ahumado, queso crema, huevos revueltos, palta y ciboulette.', tags: ['signature'] },
+      { name: 'Brunch Parisino (para compartir)', price: 25000, desc: '2 tostadas, 2 croissants, 2 panqueques, 2 omelette, jamón, queso, mermelada, mantequilla, 2 cafés, 2 jugos y una torta de tu elección.', tags: ['signature'] }
+    ]
+  },
+  {
+    id: 'frites',
+    title: 'Frites',
+    subtitle: 'Papas Fritas',
+    icon: '🍟',
+    items: [
+      { name: 'Cono de Papas', price: 3500, desc: 'Papas naturales clásicas, doradas y crujientes.', tags: ['veg'] },
+      { name: 'Cono de Papas con Chorizo', price: 5500, desc: 'Papas naturales con chorizo de la casa y salsa verde de ciboulette.', tags: [] },
+      { name: 'Cono de Papas Poutine', price: 5000, desc: 'Papas naturales, cebolla salteada, queso mozzarella gratinado y salsa francesa demi glace.', tags: ['veg','signature'] },
+      { name: 'Cono Cheddar y Tocino', price: 5500, desc: 'Papas naturales con queso cheddar fundido y tocino.', tags: [] },
+      { name: 'Cono de Papas con Mechada', price: 6500, desc: 'Papas naturales con mechada y salsa demi glace.', tags: [] },
+      { name: 'Cono de Papas Ciboulett', price: 5000, desc: 'Papas naturales con salsa verde de ciboulette y demi glace de ave.', tags: [] },
+      { name: 'Cono Choclo y Tocino', price: 6500, desc: 'Papas naturales, choclo, tocino, crema de leche y ciboulette.', tags: [] },
+      { name: 'Cono de Papas Chicken', price: 5800, desc: 'Papas naturales con chicken pop crujiente.', tags: [] },
+      { name: 'Cono Vegetariano', price: 6500, desc: 'Papas naturales, falafel, hummus de garbanzo, salsa de ajo, champiñones al ajillo y cebolla salteada.', tags: ['veg','signature'] },
+      { name: 'Cono Burguer', price: 7000, desc: 'Papas naturales con una hamburguesa, queso cheddar y mayonesa.', tags: [] },
+      { name: 'Cono BBQ', price: 5500, desc: 'Papas naturales con aros de cebolla hechos en casa y salsa BBQ.', tags: ['veg'] },
+      { name: 'Cono Andalouse', price: 5500, desc: 'Papas naturales con salsa francesa andalouse a base de pimentón rostizado ahumado.', tags: ['veg'] }
+    ]
+  },
+  {
+    id: 'pizzas',
+    title: 'Pizzas',
+    subtitle: 'Al Corte',
+    icon: '🍕',
+    items: [
+      { name: 'Pizza Vegetariana', price: 3500, desc: 'Selección de vegetales frescos sobre masa artesanal.', tags: ['veg'] },
+      { name: 'Pizza Camarón Gorgonzola', price: 4000, desc: 'Camarones y queso gorgonzola, una combinación elegante.', tags: ['signature'] },
+      { name: 'Pizza Pepperoni Pesto', price: 3500, desc: 'Pepperoni con un toque de pesto fresco.', tags: [] },
+      { name: 'Pizza Jamón Tocino', price: 3500, desc: 'Clásica combinación de jamón y tocino crujiente.', tags: [] },
+      { name: 'Pizza Napolitana', price: 3500, desc: 'La tradicional napolitana al estilo italiano.', tags: ['veg'] },
+      { name: 'Pizza Caprese', price: 3500, desc: 'Mozzarella, tomate y albahaca fresca.', tags: ['veg'] },
+      { name: 'Pizza Palermo', price: 4000, desc: 'Jamón serrano, tomates deshidratados y pesto de rúgula.', tags: ['signature'] },
+      { name: 'Pizza Todas las Carnes', price: 4000, desc: 'Pepperoni, jamón y tocino — para los carnívoros.', tags: [] },
+      { name: 'Pizza Fugazzetta', price: 4000, desc: 'Doble queso mozzarella, cebolla salteada, orégano y queso parmesano.', tags: ['veg','signature'] }
+    ]
+  },
+  {
+    id: 'postres',
+    title: 'Dessert',
+    subtitle: 'Postres',
+    icon: '🍰',
+    items: [
+      { name: 'Queque Vainilla y Chocolate con Nutella', price: 2500, desc: 'Queque suave con cobertura de Nutella.', tags: ['veg'] },
+      { name: 'Torta Porción Red Velvet', price: 4000, desc: 'Clásica torta red velvet con frosting de queso crema.', tags: ['veg'] },
+      { name: 'Torta Porción Carrot Cake', price: 4000, desc: 'Torta de zanahoria con frosting cremoso.', tags: ['veg'] },
+      { name: 'Cheese Cake Oreo', price: 4000, desc: 'Cheesecake cremoso con base de galleta Oreo.', tags: ['veg'] },
+      { name: 'Cheese Cake Maracuyá', price: 4000, desc: 'Cheesecake con cobertura tropical de maracuyá.', tags: ['veg'] },
+      { name: 'Choco Flan', price: 4000, desc: 'Combinación perfecta entre flan y bizcocho de chocolate.', tags: ['veg'] },
+      { name: "Waffles L'Atelier con Helado", price: 5000, desc: 'Waffles con syrop de chocolate, helado y crema chantilly.', tags: ['veg','signature'] },
+      { name: 'Volcán de Chocolate Vesubio con Helado', price: 5000, desc: 'Volcán de chocolate caliente con corazón fundente y helado.', tags: ['veg','signature'] },
+      { name: 'Crepe con Helado y Nutella', price: 5500, desc: 'Crepe francés con helado y abundante Nutella.', tags: ['veg'] },
+      { name: 'Affogatto', price: 5800, desc: '2 bolas de helado, mezcla de café expresso y licor de café italiano Borguetti.', tags: ['veg','signature'] }
+    ]
+  },
+  {
+    id: 'bebestibles',
+    title: 'Boissons',
+    subtitle: 'Bebestibles',
+    icon: '🥂',
+    items: [
+      { name: 'Coca Cola, Fanta, Sprite, Coca Zero', price: 2500, desc: 'Bebidas clásicas en lata o botella.', tags: ['veg','nogluten'] },
+      { name: 'Limonada Menta', price: 3500, desc: 'Limonada artesanal con menta fresca.', tags: ['veg','nogluten'] },
+      { name: 'Jugos Naturales', price: 3500, desc: 'Jugos naturales de frutas de estación.', tags: ['veg','nogluten'] },
+      { name: 'Agua San Pellegrino 500ml', price: 3500, desc: 'Agua mineral italiana San Pellegrino.', tags: ['veg','nogluten'] },
+      { name: 'Limonata San Pellegrino 330ml', price: 3500, desc: 'Limonada gasificada italiana San Pellegrino Sparkling.', tags: ['veg','nogluten'] },
+      { name: 'Agua Evian sin Gas 300ml', price: 3000, desc: 'Agua mineral francesa Evian.', tags: ['veg','nogluten'] },
+      { name: 'Agua Evian sin Gas 500ml', price: 3500, desc: 'Agua mineral francesa Evian, formato grande.', tags: ['veg','nogluten'] },
+      { name: 'Agua Perrier con Gas 330ml', price: 3000, desc: 'Agua mineral con gas francesa Perrier.', tags: ['veg','nogluten'] }
+    ]
+  }
+];
+
+// === FORMATEAR PRECIO ===
+function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
+
+// === RENDER ===
+const menuContent = document.getElementById('menuContent');
+const catNav = document.getElementById('catNav');
+
+const tagLabels = {
+  veg: '🌱 Vegetariano',
+  nogluten: 'Sin Gluten',
+  lactose: 'Sin Lactosa',
+  spicy: 'Picante',
+  signature: '⭐ Signature'
+};
+
+function renderMenu() {
+  menuContent.innerHTML = '';
+  catNav.innerHTML = '';
+
+  menuData.forEach(cat => {
+    // Nav link
+    const link = document.createElement('a');
+    link.href = '#cat-' + cat.id;
+    link.className = 'cat-link';
+    link.textContent = cat.title;
+    catNav.appendChild(link);
+
+    // Sección
+    const section = document.createElement('section');
+    section.className = 'category';
+    section.id = 'cat-' + cat.id;
+    section.innerHTML = `
+      <header class="category-header">
+        <h2 class="category-title">${cat.title}</h2>
+        <div class="category-subtitle">${cat.subtitle}</div>
+        <div class="category-divider">
+          <span class="line"></span>
+          <span class="ornament">❖</span>
+          <span class="line"></span>
+        </div>
+      </header>
+      <div class="items-grid" data-grid="${cat.id}"></div>
+    `;
+    menuContent.appendChild(section);
+
+    const grid = section.querySelector('.items-grid');
+    cat.items.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.dataset.tags = (item.tags || []).join(',');
+      card.dataset.name = item.name.toLowerCase();
+      card.dataset.desc = (item.desc || '').toLowerCase();
+      card.dataset.icon = cat.icon;
+
+      let priceHTML;
+      if (item.priceMulti) {
+        priceHTML = '<div class="item-price item-price-multi">' +
+          Object.entries(item.priceMulti).map(([k,v]) => `<span>${k} ${fmt(v)}</span>`).join('') +
+          '</div>';
+      } else {
+        priceHTML = `<div class="item-price">${fmt(item.price)}</div>`;
+      }
+
+      const tagsHTML = (item.tags || []).map(t => `<span class="tag ${t}">${tagLabels[t] || t}</span>`).join('');
+
+      card.innerHTML = `
+        <div class="item-header">
+          <h3 class="item-name">${item.name}</h3>
+          ${priceHTML}
+        </div>
+        ${item.desc ? `<p class="item-desc">${item.desc}</p>` : ''}
+        ${tagsHTML ? `<div class="item-tags">${tagsHTML}</div>` : ''}
+      `;
+
+      card.addEventListener('click', () => openModal(item, cat.icon));
+      grid.appendChild(card);
+    });
+  });
+}
+
+// === FILTROS Y BÚSQUEDA ===
+let activeFilter = 'all';
+
+function applyFilters() {
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+  let totalVisible = 0;
+
+  document.querySelectorAll('.category').forEach(section => {
+    let visibleInSection = 0;
+    section.querySelectorAll('.item-card').forEach(card => {
+      const tags = card.dataset.tags.split(',');
+      const name = card.dataset.name;
+      const desc = card.dataset.desc;
+
+      const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+      const matchesQuery = !query || name.includes(query) || desc.includes(query);
+
+      const show = matchesFilter && matchesQuery;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleInSection++;
+    });
+
+    section.style.display = visibleInSection > 0 ? '' : 'none';
+    totalVisible += visibleInSection;
+  });
+
+  // Mostrar mensaje vacío
+  let emptyEl = document.getElementById('empty-state');
+  if (totalVisible === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'empty-state';
+      emptyEl.className = 'empty';
+      emptyEl.innerHTML = '— No encontramos platos con esos criterios —';
+      menuContent.appendChild(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else if (emptyEl) {
+    emptyEl.style.display = 'none';
+  }
+}
+
+document.getElementById('filters').addEventListener('click', (e) => {
+  const btn = e.target.closest('.filter-chip');
+  if (!btn) return;
+  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.filter;
+  applyFilters();
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+// === MODAL ===
+function openModal(item, icon) {
+  document.getElementById('modalIcon').textContent = icon;
+  document.getElementById('modalName').textContent = item.name;
+
+  let priceText;
+  if (item.priceMulti) {
+    priceText = Object.entries(item.priceMulti).map(([k,v]) => `${k}: ${fmt(v)}`).join(' · ');
+  } else {
+    priceText = fmt(item.price);
+  }
+  document.getElementById('modalPrice').textContent = priceText;
+  document.getElementById('modalDesc').textContent = item.desc || '';
+
+  const tagsEl = document.getElementById('modalTags');
+  tagsEl.innerHTML = (item.tags || []).map(t => `<span class="tag ${t}">${tagLabels[t] || t}</span>`).join('');
+
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target.closest('.modal') && !e.target.classList.contains('modal-overlay')) return;
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// === SCROLL: marcar categoría activa ===
+function setupScrollSpy() {
+  const sections = document.querySelectorAll('.category');
+  const links = document.querySelectorAll('.cat-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id.replace('cat-', '');
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#cat-' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+// === INIT ===
+renderMenu();
+setupScrollSpy();
+</script>
+
+</body>
+</html>
